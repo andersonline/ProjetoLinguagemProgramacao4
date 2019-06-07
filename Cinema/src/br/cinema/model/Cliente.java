@@ -3,6 +3,7 @@ package br.cinema.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,11 +12,19 @@ import javax.persistence.Table;
 public class Cliente {
 	
 	@Id
+	@GeneratedValue
 	private int id;
 	private String tipoCliente; // Normal, VIP, Ouro e Platinum 
 	private boolean estudante;
 	private LocalDate validade;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getTipoCliente() {
 		return tipoCliente;
