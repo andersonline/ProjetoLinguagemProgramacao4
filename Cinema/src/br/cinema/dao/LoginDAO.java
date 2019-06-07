@@ -2,7 +2,6 @@ package br.cinema.dao;
 
 import java.util.List;
 
-import br.cinema.model.Filme;
 import br.cinema.model.Login;
 
 public interface LoginDAO {

@@ -11,8 +11,6 @@ import java.util.List;
 import br.cinema.jpa.CinemaDAOException;
 import br.cinema.jpa.FabricaConexao;
 import br.cinema.model.Endereco;
-import br.cinema.model.Filme;
-import br.cinema.model.Login;
 
 public class EnderecoPersist implements EnderecoDAO {
 
