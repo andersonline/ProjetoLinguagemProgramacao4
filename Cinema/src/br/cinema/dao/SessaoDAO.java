@@ -2,7 +2,6 @@ package br.cinema.dao;
 
 import java.util.List;
 
-import br.cinema.model.Assento;
 import br.cinema.model.Sessao;
 
 public interface SessaoDAO {

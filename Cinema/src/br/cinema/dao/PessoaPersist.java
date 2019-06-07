@@ -11,9 +11,7 @@ import java.util.List;
 
 import br.cinema.jpa.CinemaDAOException;
 import br.cinema.jpa.FabricaConexao;
-import br.cinema.model.Cliente;
 import br.cinema.model.Endereco;
-import br.cinema.model.Filme;
 import br.cinema.model.Login;
 import br.cinema.model.Pessoa;
 

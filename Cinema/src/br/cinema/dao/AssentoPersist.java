@@ -11,7 +11,6 @@ import java.util.List;
 import br.cinema.jpa.CinemaDAOException;
 import br.cinema.jpa.FabricaConexao;
 import br.cinema.model.Assento;
-import br.cinema.model.Login;
 
 public class AssentoPersist implements AssentoDAO {
 
