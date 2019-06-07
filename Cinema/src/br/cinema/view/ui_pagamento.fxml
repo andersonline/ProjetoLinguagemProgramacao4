@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="334.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cinema.controller.Pagamento">
+	<children>
+		<AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="500.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+			<children>
+				<Button id="btnFechar" fx:id="btnFechar" layoutX="369.0" layoutY="217.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" style="-fx-background-color: #050505;" text="Fechar" textFill="WHITE">
+               <font>
+                  <Font name="Cantarell Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+				<Button id="btnOk" fx:id="btnOk" layoutX="502.0" layoutY="217.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="90.0" style="-fx-background-color: #050505;" text="OK" textFill="WHITE">
+               <font>
+                  <Font name="Cantarell Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <ComboBox layoutX="408.0" layoutY="83.0" prefHeight="35.0" prefWidth="150.0" promptText="Forma" style="-fx-font-family: Cantarell; -fx-font-size: 16px;" />
+            <ImageView fitHeight="103.0" fitWidth="288.0" layoutX="48.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/formas-de-pagamento.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="123.0" fitWidth="310.0" layoutX="31.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/formas.png" />
+               </image>
+            </ImageView>
+			</children>
+		</AnchorPane>
+	</children>
+</VBox>

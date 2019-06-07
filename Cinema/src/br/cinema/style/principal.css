@@ -1,0 +1,53 @@
+.split-pane-divider,
+.context-menu,
+.list-view,
+.list-view:focused {
+   -fx-background-color: #D3D3D3;
+}
+
+.split-pane {
+	-fx-background-color: #F4F4F4;
+}
+
+.menu-bar > .container > .menu-button > .label,
+.menu-item > .label {
+    -fx-text-fill: #5A5A5A;
+}
+
+.menu-bar > .container > .menu-button:showing > .label,
+.menu-bar > .container > .menu-button:hover > .label,
+.menu-item:hover > .label,
+.menu-item:focused > .label{
+-fx-text-fill: white;
+}
+
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:showing,
+.menu-item:focused {
+    -fx-background-color:  #5A5A5A;
+}
+
+#header {
+	-fx-background-color:  linear-gradient(to right, #009688, #009BAC);
+}
+
+.tab-pane {
+	-fx-padding:  -33 0 0 0;
+}
+
+.list-cell:filled:selected:focused {
+    -fx-background-color: linear-gradient(to right, #009688, #D3D3D3);
+    -fx-text-fill: white;
+}
+
+.list-cell:filled:hover {
+    -fx-background-color: #ECECEC;
+}
+
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+/*    -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}

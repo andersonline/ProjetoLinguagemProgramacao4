@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" onKeyPressed="#checkKey" prefHeight="543.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.cinema.controller.Login">
+	<children>
+		<JFXTextField fx:id="txtLogin" focusColor="#2d2b35" labelFloat="true" layoutX="284.0" layoutY="285.0" prefHeight="35.0" prefWidth="224.0" promptText="E-mail" styleClass="txtLogin" unFocusColor="#2d2b35">
+			<font>
+				<Font name="Cantarell Regular" size="18.0" />
+			</font>
+		</JFXTextField>
+		<JFXPasswordField fx:id="pswSenha" focusColor="#2d2b35" labelFloat="true" layoutX="285.0" layoutY="351.0" promptText="Senha" styleClass="txtLogin" unFocusColor="#2d2b35">
+			<font>
+				<Font name="Cantarell Regular" size="18.0" />
+			</font>
+		</JFXPasswordField>
+		<JFXButton fx:id="btnFechar" buttonType="RAISED" contentDisplay="GRAPHIC_ONLY" layoutX="485.0" layoutY="164.0" onAction="#closeWindow" prefHeight="40.0" prefWidth="40.0" ripplerFill="BLACK" textFill="#ececf6">
+			<font>
+				<Font name="Cantarell Regular" size="18.0" />
+			</font>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
+			<graphic>
+				<FontAwesomeIconView fill="#c12a3f" glyphName="CLOSE" size="30.0">
+				</FontAwesomeIconView>
+			</graphic>
+		</JFXButton>
+		<JFXButton fx:id="btnEntrar" buttonType="RAISED" layoutX="343.0" layoutY="438.0" onAction="#validarLogin" prefHeight="25.0" prefWidth="81.0" ripplerFill="BLACK" styleClass="btnLogin" text="Entrar" textFill="#ececf6">
+			<font>
+				<Font name="Cantarell Regular" size="18.0" />
+			</font>
+			<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
+		</JFXButton>
+		<FontAwesomeIconView fill="#2d2b35" glyphName="USER" layoutX="254.0" layoutY="309.0" size="20.0" />
+		<FontAwesomeIconView fill="#2d2b35" glyphName="LOCK" layoutX="256.0" layoutY="375.0" size="20.0" />
+		<Line endX="-100.0" endY="202.0" layoutX="329.0" layoutY="301.0" startX="-100.0" startY="-45.0" strokeWidth="2.0">
+		</Line>
+		<Label layoutX="55.0" layoutY="255.0" text="Cinema">
+			<font>
+				<Font name="Cantarell Bold" size="38.0" />
+			</font>
+		</Label>
+		<ImageView fitHeight="119.0" fitWidth="111.0" layoutX="65.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../images/logo.png" />
+			</image>
+			<effect>
+				<Reflection fraction="0.33" topOffset="-2.0" topOpacity="0.18" />
+			</effect>
+		</ImageView>
+      <Label fx:id="lblAviso" layoutX="294.0" layoutY="403.0" opacity="0.0" text="E-mail ou senha incorretos!" textFill="#c12a3f" />
+	</children>
+</AnchorPane>

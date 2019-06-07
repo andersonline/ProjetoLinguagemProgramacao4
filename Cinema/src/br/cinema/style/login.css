@@ -1,0 +1,19 @@
+#rootPane {
+	-fx-fill: transparent;
+	-fx-background-color: transparent;
+	-fx-background-image: url("../images/login.png");
+	-fx-background-size: cover;	
+}
+
+.txtLogin {
+	
+}
+
+.btnLogin {
+	-fx-background-color: #2D2B35;
+	-fx-border-radius: 5px;
+}
+
+.separator {
+	/*-fx-background-color: #2D2B35;*/
+}
