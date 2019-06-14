@@ -3,27 +3,34 @@ package br.cinema.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tab_cliente")
-public class Cliente {
+public class Cliente extends Pessoa {
 	
-	@Id
-	@GeneratedValue
-	private int id;
 	private String tipoCliente; // Normal, VIP, Ouro e Platinum 
 	private boolean estudante;
 	private LocalDate validade;
 
-	public int getId() {
-		return id;
+	public Cliente() {
+		super();
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public Cliente(String nome, String cpf, String email, String senha, String fone, LocalDate dataNascimento,
+			Endereco endereco, String tipoCliente, boolean estudante, LocalDate validade) {
+		super(nome, cpf, email, senha, fone, dataNascimento, endereco);
+		this.tipoCliente = tipoCliente;
+		this.estudante = estudante;
+		this.validade = validade;
+	}
+	
+	public Cliente(int id, String nome, String cpf, String email, String senha, String fone, LocalDate dataNascimento,
+			Endereco endereco, String tipoCliente, boolean estudante, LocalDate validade) {
+		super(id, nome, cpf, email, senha, fone, dataNascimento, endereco);
+		this.tipoCliente = tipoCliente;
+		this.estudante = estudante;
+		this.validade = validade;
 	}
 
 	public String getTipoCliente() {

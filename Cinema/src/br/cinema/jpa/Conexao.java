@@ -10,7 +10,7 @@ public class Conexao {
 
 	public Conexao() {
 		emf = Persistence.createEntityManagerFactory("Cinema");
-		if (emf == null) {
+		if (emf != null) {
 			em = emf.createEntityManager();
 		}
 	}

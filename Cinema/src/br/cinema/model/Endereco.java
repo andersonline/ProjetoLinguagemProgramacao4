@@ -1,6 +1,17 @@
 package br.cinema.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tab_endereco")
 public class Endereco {
+	@Id
+	@GeneratedValue
+	@Column(name = "id_endereco")
 	private int id;
 	private String logradouro;
 	private String numero;
@@ -9,6 +20,9 @@ public class Endereco {
 	private String cidade;
 	private String estado;
 	private String complemento;
+	
+	public Endereco() {
+	}
 	
 	public Endereco(int id, String logradouro, String numero, String bairro, String cep, String cidade, String estado,
 			String complemento) {

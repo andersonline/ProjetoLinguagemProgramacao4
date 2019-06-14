@@ -1,12 +1,15 @@
 package br.cinema.application;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.time.LocalDate;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
+import br.cinema.dao.AuthenticateDAO;
+import br.cinema.dao.DaoGenerico;
+import br.cinema.model.Cliente;
+import br.cinema.model.Endereco;
+import br.cinema.model.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -52,11 +55,14 @@ public class Main extends Application {
 	public static Logger log = Logger.getLogger(Main.class);
 
 	public static void main(String[] args) {
-//		launch(args);
-		BasicConfigurator.configure();
+		launch(args);
+//		BasicConfigurator.configure();
 //		Logger.getRootLogger().setLevel(Level.WARN);
-		log.warn("abrindo conexão");
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("Cinema");
-		EntityManager em = factory.createEntityManager();
+//		log.warn("abrindo conexão");
+//		DaoGenerico<Cliente> daoCliente = new DaoGenerico<>();
+//		new Cliente(id, nome, cpf, email, fone, dataNascimento, endereco, login, tipoCliente, estudante, validade)
+//		daoCliente.save(new Cliente("Anderson", "09876543210", "anderson@gmail.com", "123", "67998765432", LocalDate.of(2019, 12, 19), new Endereco("Rua teste", "12", "Jardim", "0987678", "TL", "MS", null), "vip", false, null));
+//		AuthenticateDAO authenticateDAO = new AuthenticateDAO();
+//		log.warn(authenticateDAO.validateLogin("anderson@gmail.com", "123"));
 	}
 }

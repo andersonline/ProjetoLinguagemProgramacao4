@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import br.cinema.dao.AuthenticateDAO;
 import br.cinema.jpa.CinemaDAOException;
 import br.cinema.jpa.FabricaConexao;
 import javafx.animation.KeyFrame;
@@ -47,48 +48,35 @@ public class Login implements Initializable {
 
 	@FXML
 	private Label lblAviso;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@FXML
 	public void validarLogin() {
-		String username = txtLogin.getText();
+		String email = txtLogin.getText();
 		String password = pswSenha.getText();
-
-		String sql = "SELECT * FROM tab_login WHERE email = ? AND senha = ?";
-
-		try {
-			Connection conn = FabricaConexao.getConnection();
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, username);
-			stmt.setString(2, password);
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				FabricaConexao.closeConnection(conn, stmt, rs);
-				try {
-					((Stage) rootPane.getScene().getWindow()).close();
-					AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ui_principal.fxml"));
-					Scene scene = new Scene(root);
-					Stage stage = new Stage();
-					scene.getStylesheets().add(getClass().getResource("../style/principal.css").toExternalForm());
-					stage.setMinWidth(1140);
-					stage.setMaximized(true);
-					stage.setTitle("Sistema do cinema");
-					stage.setScene(scene);
-					stage.show();
-				} catch (IOException ex) {
-					System.err.println(ex);
-				}
-			} else {
-				FabricaConexao.closeConnection(conn, stmt, rs);
-				showErrorMessage();
+		AuthenticateDAO authenticateDAO = new AuthenticateDAO();
+		if (authenticateDAO.validateLogin(email, password)) {
+			try {
+				((Stage) rootPane.getScene().getWindow()).close();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ui_principal.fxml"));
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				scene.getStylesheets().add(getClass().getResource("../style/principal.css").toExternalForm());
+				stage.setMinWidth(1140);
+				stage.setMaximized(true);
+				stage.setTitle("Sistema do cinema");
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException ex) {
+				System.err.println(ex);
 			}
-		} catch (CinemaDAOException | SQLException e) {
-			e.printStackTrace();
+		} else {
+			showErrorMessage();
 		}
 	}
 

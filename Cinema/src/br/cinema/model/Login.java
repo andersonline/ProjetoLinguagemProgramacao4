@@ -1,10 +1,24 @@
 package br.cinema.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tab_login")
 public class Login {
+	@Id
+	@GeneratedValue
+	@Column(name = "id_login")
 	private int id;
 	private String email;
 	private String senha;
 	private String tipo;
+	
+	public Login() {
+	}
 	
 	public Login(int id, String email, String senha, String tipo) {
 		this.id = id;

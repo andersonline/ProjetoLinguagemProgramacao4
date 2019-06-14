@@ -2,17 +2,50 @@ package br.cinema.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "tab_pessoa")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa {
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
 	private int id;
 	private String nome;
 	private String cpf;
 	private String email;
+	private String senha;
 	private String fone;
 	private LocalDate dataNascimento;
+	@ManyToOne
 	private Endereco endereco;
-	private Login login;
 
-	public Pessoa(int id, String nome, String cpf, String email, String fone, LocalDate dataNascimento, Endereco endereco, Login login) {
+	public Pessoa() {
+		super();
+	}
+	
+	public Pessoa(String nome, String cpf, String email, String senha, String fone, LocalDate dataNascimento,
+			Endereco endereco) {
+		super();
+		this.nome = nome;
+		this.cpf = cpf;
+		this.email = email;
+		this.fone = fone;
+		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+	}
+
+	public Pessoa(int id, String nome, String cpf, String email, String senha, String fone, LocalDate dataNascimento,
+			Endereco endereco) {
+		super();
 		this.id = id;
 		this.nome = nome;
 		this.cpf = cpf;
@@ -20,17 +53,6 @@ public class Pessoa {
 		this.fone = fone;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
-		this.login= login;
-	}
-	
-	public Pessoa(String nome, String cpf, String email, String fone, LocalDate dataNascimento, Endereco endereco, Login login) {
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.fone = fone;
-		this.dataNascimento = dataNascimento;
-		this.endereco = endereco;
-		this.login= login;
 	}
 
 	public int getId() {
@@ -92,11 +114,11 @@ public class Pessoa {
 		this.endereco = endereco;
 	}
 
-	public Login getLogin() {
-		return login;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setLogin(Login login) {
-		this.login = login;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }
