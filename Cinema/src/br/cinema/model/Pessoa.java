@@ -18,9 +18,11 @@ public class Pessoa {
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
-	private int id;
+	private int id = 0;
 	private String nome;
+	@Column(unique = true)
 	private String cpf;
+	@Column(unique = true)
 	private String email;
 	private String senha;
 	private String fone;
@@ -38,6 +40,7 @@ public class Pessoa {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
+		this.senha = senha;
 		this.fone = fone;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
@@ -50,6 +53,7 @@ public class Pessoa {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
+		this.senha = senha;
 		this.fone = fone;
 		this.dataNascimento = dataNascimento;
 		this.endereco = endereco;
@@ -88,6 +92,14 @@ public class Pessoa {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public String getFone() {
 		// Retornar fone com mask
@@ -112,13 +124,5 @@ public class Pessoa {
 	
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
 	}
 }

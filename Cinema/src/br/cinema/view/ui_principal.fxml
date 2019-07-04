@@ -81,7 +81,7 @@
                            </image>
                         </ImageView>
                      </graphic></Label>
-						<ListView fx:id="lstCategorias" layoutY="116.0" prefHeight="433.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
+						<ListView id="categorias" fx:id="lstCategorias" layoutY="116.0" prefHeight="433.0" prefWidth="178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="116.0">
 							<cursor>
 								<Cursor fx:constant="HAND" />
 							</cursor>

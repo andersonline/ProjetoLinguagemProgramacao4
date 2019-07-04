@@ -3,13 +3,13 @@ package br.cinema.application;
 import java.time.LocalDate;
 
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import br.cinema.dao.AuthenticateDAO;
 import br.cinema.dao.DaoGenerico;
 import br.cinema.model.Cliente;
 import br.cinema.model.Endereco;
-import br.cinema.model.Login;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -59,9 +59,12 @@ public class Main extends Application {
 //		BasicConfigurator.configure();
 //		Logger.getRootLogger().setLevel(Level.WARN);
 //		log.warn("abrindo conexão");
+//		DaoGenerico<Endereco> daoEndereco = new DaoGenerico<>();
+//		Endereco endereco = new Endereco("Rua teste", "12", "Jardim", "0987678", "TL", "MS", null);
+//		daoEndereco.save(endereco);
 //		DaoGenerico<Cliente> daoCliente = new DaoGenerico<>();
-//		new Cliente(id, nome, cpf, email, fone, dataNascimento, endereco, login, tipoCliente, estudante, validade)
-//		daoCliente.save(new Cliente("Anderson", "09876543210", "anderson@gmail.com", "123", "67998765432", LocalDate.of(2019, 12, 19), new Endereco("Rua teste", "12", "Jardim", "0987678", "TL", "MS", null), "vip", false, null));
+//		daoCliente.save(new Cliente("Anderson", "09876543210", "anderson@gmail.com", "123", "67998765432", LocalDate.of(2019, 12, 19), endereco, "vip", false, null));
+		
 //		AuthenticateDAO authenticateDAO = new AuthenticateDAO();
 //		log.warn(authenticateDAO.validateLogin("anderson@gmail.com", "123"));
 	}

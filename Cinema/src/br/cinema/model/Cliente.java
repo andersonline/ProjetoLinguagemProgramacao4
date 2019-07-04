@@ -3,10 +3,14 @@ package br.cinema.model;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tab_cliente")
+@NamedQuery(name = "Cliente.buscaNome", query = "SELECT c FROM Cliente c Where c.nome = :nome")
+
+
 public class Cliente extends Pessoa {
 	
 	private String tipoCliente; // Normal, VIP, Ouro e Platinum 

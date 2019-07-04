@@ -2,6 +2,7 @@ package br.cinema.controller;
 
 import java.io.IOException;
 
+import br.cinema.model.Cliente;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,15 +40,10 @@ public class Principal {
 	private Tab tabCliente = new Tab();
 	private Tab tabOperacoes = new Tab();
 	public static boolean novo = false;
+	public static boolean editar = false;
+	public static br.cinema.model.Cliente atualizar = new Cliente();
 
 	public void initialize() {
-		tbpOperacoes.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println(tbpOperacoes.getWidth() + "x" + tbpOperacoes.getHeight());
-			}
-		});
 		loadListView();
 		selectItem();
 	}
@@ -97,6 +93,9 @@ public class Principal {
 						((Button) telaOperacoes.lookup("#btnNovo")).setOnAction(event -> {
 							novoCliente();
 						});
+						((Button) telaOperacoes.lookup("#btnEditar")).setOnAction(event -> {
+							editarCliente();
+						});
 						// 
 						tabOperacoes.setContent(telaOperacoes);
 						tbpOperacoes.getTabs().setAll(tabOperacoes);
@@ -123,6 +122,19 @@ public class Principal {
 	}
 
 	protected void novoCliente() {
+		try {
+			Principal.atualizar = new Cliente();
+			Node telaLimpa = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/ui_cliente.fxml"));
+			tabCliente.setContent(telaLimpa);
+			telaLimpa.lookup("#rootPane").setEffect(null);
+			telaLimpa.lookup("#hidePane").setVisible(false);
+			telaLimpa.lookup("#savePane").setVisible(true);
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	protected void editarCliente() {
 		try {
 			Node telaLimpa = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/ui_cliente.fxml"));
 			tabCliente.setContent(telaLimpa);

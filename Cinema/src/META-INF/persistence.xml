@@ -10,7 +10,6 @@
 		<class>br.cinema.model.Cliente</class>
 		<class>br.cinema.model.Pessoa</class>
 		<class>br.cinema.model.Endereco</class>
-		<class>br.cinema.model.Login</class>
 
 		<properties>
 			<!-- dados da conexao -->

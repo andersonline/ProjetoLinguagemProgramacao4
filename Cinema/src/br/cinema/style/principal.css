@@ -35,12 +35,12 @@
 	-fx-padding:  -33 0 0 0;
 }
 
-.list-cell:filled:selected:focused {
+#categorias .list-cell:filled:selected:focused {
     -fx-background-color: linear-gradient(to right, #009688, #D3D3D3);
     -fx-text-fill: white;
 }
 
-.list-cell:filled:hover {
+#categorias .list-cell:filled:hover {
     -fx-background-color: #ECECEC;
 }
 
