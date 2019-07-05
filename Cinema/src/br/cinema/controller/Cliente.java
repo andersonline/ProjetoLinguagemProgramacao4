@@ -15,16 +15,13 @@ import com.jfoenix.validation.RequiredFieldValidator;
 
 import br.cinema.dao.DaoGenerico;
 import br.cinema.model.Endereco;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 
 public class Cliente {
 
@@ -88,9 +85,6 @@ public class Cliente {
 	@FXML
 	private JFXButton btnSave;
 
-	@FXML
-	private HBox hbxAlert;
-
 	public void initialize() {
 		System.out.println("id: " + Principal.atualizar.getId());
 		ObservableList<String> estados = FXCollections.observableArrayList("Acre", "Alagoas", "Amapá", "Amazonas",
@@ -102,7 +96,7 @@ public class Cliente {
 				"PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
 		siglasEstados = new LinkedList<String>(Arrays.asList(temp));
 		cboEstado.setItems(estados);
-		cboTipo.setItems(FXCollections.observableArrayList("VIP", "Gold", "Diamante", "Safira"));
+		cboTipo.setItems(FXCollections.observableArrayList("Regular", "VIP", "Gold", "Diamante", "Safira"));
 		RequiredFieldValidator requiredFieldValidator = new RequiredFieldValidator("Campo é obrigatório");
 		CPFFieldValidator cpfFieldValidator = new CPFFieldValidator("CPF inválido");
 		EmailFieldValidator emailFieldValidator = new EmailFieldValidator("E-mail inválido");
@@ -200,8 +194,15 @@ public class Cliente {
 			daoEndereco.update(endereco);
 			DaoGenerico<br.cinema.model.Cliente> daoCliente = new DaoGenerico<>();
 			daoCliente.update(new br.cinema.model.Cliente(Principal.atualizar.getId(), txtNome.getText(),
-					txtCpf.getText(), txtEmail.getText(), Principal.atualizar.getSenha(), txtTelefone.getText(), dtpNascimento.getValue(),
-					endereco, cboTipo.getValue(), !dtpValidade.isDisabled(), dtpValidade.getValue()));
+					txtCpf.getText(), txtEmail.getText(), Principal.atualizar.getSenha(), txtTelefone.getText(),
+					dtpNascimento.getValue(), endereco, cboTipo.getValue(), !dtpValidade.isDisabled(),
+					dtpValidade.getValue()));
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Cliente atualizado");
+			alert.setHeaderText(null);
+			alert.setContentText("Os dados foram atualizados com sucesso!");
+			alert.showAndWait();
+			
 		} else {
 			// Novo
 			DaoGenerico<Endereco> daoEndereco = new DaoGenerico<>();
@@ -213,14 +214,37 @@ public class Cliente {
 			if (daoCliente.save(new br.cinema.model.Cliente(txtNome.getText(), txtCpf.getText(), txtEmail.getText(),
 					null, txtTelefone.getText(), dtpNascimento.getValue(), endereco, cboTipo.getValue(),
 					!dtpValidade.isDisabled(), dtpValidade.getValue()))) {
-				hbxAlert.setVisible(true);
+
 			} else {
-				System.out.println("Erro");
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setResizable(true);
+				alert.setTitle("Mensagem de erro");
+				alert.setHeaderText("Não foi possível criar o cliente");
+				alert.setContentText("Por favor, verifique sua conexão e se CPF e e-mail já estão cadastrados.");
+				alert.showAndWait();
 			}
 		}
+		Principal.atualizar = new br.cinema.model.Cliente();
+		clearFields();
 	}
 
-	private void showErrorMessage() {
-		hbxAlert.setVisible(true);
+	public void clearFields() {
+		txtNome.setText("");
+		txtCpf.setText("");
+		dtpNascimento.setValue(null);
+		txtTelefone.setText("");
+		txtEmail.setText("");
+		cboTipo.setValue(null);
+		isStudent = false;
+		rbtEstudante.selectedProperty().set(false);
+		dtpValidade.setValue(null);
+		dtpValidade.setDisable(true);
+		txtCep.setText("");
+		txtLogradouro.setText("");
+		txtNumero.setText("");
+		txtBairro.setText("");
+		txtCidade.setText("");
+		cboEstado.setValue(null);
+		txaComplemento.setText("");
 	}
 }

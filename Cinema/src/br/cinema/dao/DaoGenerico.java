@@ -3,13 +3,10 @@ package br.cinema.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
 
 import br.cinema.jpa.Conexao;
-import br.cinema.model.Cliente;
 
 public class DaoGenerico<T> {
 	public static Logger log;

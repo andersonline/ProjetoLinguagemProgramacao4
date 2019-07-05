@@ -55,17 +55,22 @@ public class Login implements Initializable {
 	public void validarLogin() {
 		btnEntrar.setText("");
 		btnEntrar.setGraphic(new ProgressIndicator());
-		Task tarefaCargaPg = new Task() {
+		Task<Boolean> tarefaCargaPg = new Task<Boolean>() {
 			@Override
 			protected Boolean call() {
+				
 				String email = txtLogin.getText();
 				String password = pswSenha.getText();
+//				txtLogin.setDisable(true);
+//				pswSenha.setDisable(true);
 				AuthenticateDAO authenticateDAO = new AuthenticateDAO();
 				return authenticateDAO.validateLogin(email, password);
 			}
 
 			@Override
 			protected void succeeded() {
+//				txtLogin.setDisable(false);
+//				pswSenha.setDisable(false);
 				if (getValue().equals(false)) {
 					btnEntrar.setText("Entrar");
 					btnEntrar.setGraphic(null);

@@ -1,9 +1,6 @@
 package br.cinema.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import javax.swing.JCheckBox;
+import java.util.Optional;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -12,33 +9,30 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
 import br.cinema.dao.DaoGenerico;
-import br.cinema.model.Cliente;
-import br.cinema.util.Selecionados;
+import br.cinema.util.Listas;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.Paint;
-import javafx.util.Callback;
 
 public class OperacoesCliente {
 
 	@FXML
 	private JFXButton btnNovo;
-	
+
 	@FXML
 	private JFXButton btnEditar;
 
@@ -79,50 +73,87 @@ public class OperacoesCliente {
 	private JFXButton btnExcluir;
 
 	public void initialize() {
-    	ObservableList<String> olv = FXCollections.<String>observableArrayList("CPF", "E-mail", "Fone", "Data de nascimento", "Tipo do cliente");
+		ObservableList<String> olv = FXCollections.<String>observableArrayList("Nome", "CPF", "E-mail", "Fone", "Plano", "Tudo");
 		cboPor.getItems().addAll(olv);
-		DaoGenerico<br.cinema.model.Cliente> dao = new DaoGenerico<>();
+		cboPor.setValue("Tudo");
 //		for (br.cinema.model.Cliente c : dao.getAll(br.cinema.model.Cliente.class)) {
 //			tblClientes.getItems().add(c);
 //		}
-		selector.setCellValueFactory((TableColumn.CellDataFeatures<br.cinema.model.Cliente, Boolean> p) -> new SimpleBooleanProperty(p.getValue() != null));
+		selector.setCellValueFactory(
+				(TableColumn.CellDataFeatures<br.cinema.model.Cliente, Boolean> p) -> new SimpleBooleanProperty(
+						p.getValue() != null));
 		selector.setCellFactory((TableColumn<br.cinema.model.Cliente, Boolean> p) -> new BooleanCell());
 		nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
 		cpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 		email.setCellValueFactory(new PropertyValueFactory<>("email"));
+		email.setCellValueFactory(new PropertyValueFactory<>("fone"));
 		plano.setCellValueFactory(new PropertyValueFactory<>("tipoCliente"));
-		tblClientes.setItems(FXCollections.observableArrayList(dao.getAll(br.cinema.model.Cliente.class)));
-		tblClientes.setRowFactory( tv -> {
-		    TableRow<br.cinema.model.Cliente> row = new TableRow<>();
-		    row.setCursor(Cursor.HAND);
-		    row.setOnMouseClicked(event -> {
-		        if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
-		        	Principal.atualizar = row.getItem();
-		            btnEditar.fire();
-		        }
-		    });
-		    return row ;
+		atualizar();
+		tblClientes.setRowFactory(tv -> {
+			TableRow<br.cinema.model.Cliente> row = new TableRow<>();
+			row.setCursor(Cursor.HAND);
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					Principal.atualizar = row.getItem();
+					btnEditar.fire();
+				}
+			});
+			return row;
 		});
-    }
+	}
 
 	@FXML
 	public void novoCliente() {
 		Principal.novo = true;
 	}
-	
+
 	@FXML
 	public void editarCliente() {
 		Principal.editar = true;
 	}
 	
 	@FXML
-	public void deleteClientes() {
-		DaoGenerico<br.cinema.model.Cliente> dao = new DaoGenerico<>();
-		for (br.cinema.model.Cliente c : Selecionados.list) {
-			dao.delete(br.cinema.model.Cliente.class, c.getId());
+	public void atualizar() {
+		if (!cboPor.getValue().equals("Tudo")) {
+			
+		} else {
+			DaoGenerico<br.cinema.model.Cliente> dao = new DaoGenerico<>();
+			tblClientes.setItems(FXCollections.observableArrayList(dao.getAll(br.cinema.model.Cliente.class)));
+			dao.close();
+			rbtSelecionarTodos.selectedProperty().set(false);
+			selecionarTodos();
 		}
-		tblClientes.setItems(FXCollections.observableArrayList(dao.getAll(br.cinema.model.Cliente.class)));
-		dao.close();
+	}
+
+	@FXML
+	public void selecionarTodos() {
+		for (JFXCheckBox cbx : Listas.allCBoxes) {
+			cbx.selectedProperty().set(rbtSelecionarTodos.isSelected());
+		}
+		if (rbtSelecionarTodos.isSelected()) {
+			for (br.cinema.model.Cliente c : tblClientes.getItems()) {
+				Listas.selecionados.add(c);
+			}			
+		} else {
+			Listas.selecionados.clear();
+		}
+	}
+
+	@FXML
+	public void deleteClientes() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Aviso");
+		alert.setHeaderText("Tem certexa que deseja excluir " + Listas.selecionados.size() + " cliente" + (Listas.selecionados.size() > 1 ? "s" : "") + "?");
+		alert.setContentText(null);
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			DaoGenerico<br.cinema.model.Cliente> dao = new DaoGenerico<>();
+			for (br.cinema.model.Cliente c : Listas.selecionados) {
+				dao.delete(br.cinema.model.Cliente.class, c.getId());
+			}
+			dao.close();
+		}
+		atualizar();
 	}
 }
 
@@ -131,11 +162,13 @@ class BooleanCell extends TableCell<br.cinema.model.Cliente, Boolean> {
 
 	public BooleanCell() {
 		checkBox = new JFXCheckBox();
+		if (!Listas.allCBoxes.contains(checkBox)) {
+			Listas.allCBoxes.add(checkBox);
+		};
 		checkBox.setCheckedColor(Paint.valueOf("#009688"));
 		checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-//				if (isEditing())
 			}
 		});
 		this.setGraphic(checkBox);
@@ -161,6 +194,7 @@ class BooleanCell extends TableCell<br.cinema.model.Cliente, Boolean> {
 
 	@Override
 	public void updateItem(Boolean item, boolean empty) {
+		System.out.println("Atualizado");
 		super.updateItem(item, empty);
 		checkBox.setDisable(empty);
 		checkBox.setVisible(!empty);
@@ -168,9 +202,9 @@ class BooleanCell extends TableCell<br.cinema.model.Cliente, Boolean> {
 			checkBox.selectedProperty().addListener((ov, t1, t2) -> {
 				br.cinema.model.Cliente cli = (br.cinema.model.Cliente) this.getTableRow().getItem();
 				if (checkBox.isSelected()) {
-					Selecionados.list.add(cli);
+					Listas.selecionados.add(cli);
 				} else {
-					Selecionados.list.remove(cli);
+					Listas.selecionados.remove(cli);
 				}
 			});
 		}

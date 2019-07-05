@@ -1,23 +1,15 @@
 package br.cinema.application;
 
-import java.time.LocalDate;
-
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import br.cinema.dao.AuthenticateDAO;
-import br.cinema.dao.DaoGenerico;
-import br.cinema.model.Cliente;
-import br.cinema.model.Endereco;
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Main extends Application {
 	

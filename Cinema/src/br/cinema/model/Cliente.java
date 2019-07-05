@@ -8,9 +8,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tab_cliente")
-@NamedQuery(name = "Cliente.buscaNome", query = "SELECT c FROM Cliente c Where c.nome = :nome")
-
-
+@NamedQuery(name = "Cliente.buscaNome", query = "SELECT c FROM Cliente c WHERE c.nome LIKE :nome")
+@NamedQuery(name = "Cliente.buscaCPF", query = "SELECT c FROM Cliente c WHERE c.cpf LIKE :cpf")
+@NamedQuery(name = "Cliente.buscaEmail", query = "SELECT c FROM Cliente c WHERE c.email LIKE :email")
+@NamedQuery(name = "Cliente.buscaFone", query = "SELECT c FROM Cliente c WHERE c.fone LIKE :fone")
+@NamedQuery(name = "Cliente.buscaPlano", query = "SELECT c FROM Cliente c WHERE c.tipoCliente = :plano")
 public class Cliente extends Pessoa {
 	
 	private String tipoCliente; // Normal, VIP, Ouro e Platinum 

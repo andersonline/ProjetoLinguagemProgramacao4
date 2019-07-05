@@ -4,8 +4,6 @@ import java.util.regex.Pattern;
 
 import com.jfoenix.validation.base.ValidatorBase;
 
-import br.cinema.util.ValidarCpf;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TextInputControl;
 
 public class EmailFieldValidator extends ValidatorBase {

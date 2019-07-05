@@ -114,7 +114,7 @@
 								<Insets right="10.0" />
 							</HBox.margin>
 						</JFXTextField>
-						<JFXButton fx:id="btnBuscar" contentDisplay="GRAPHIC_ONLY" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 0;" text="Buscar" textFill="WHITE">
+						<JFXButton fx:id="btnBuscar" contentDisplay="GRAPHIC_ONLY" onAction="#atualizar" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: #D3D3D3; -fx-background-radius: 0;" text="Buscar" textFill="WHITE">
 							<graphic>
 								<FontAwesomeIconView fill="#009688" glyphName="SEARCH" size="20.0" />
 							</graphic>
@@ -145,7 +145,7 @@
 				</HBox>
 				<HBox alignment="CENTER_LEFT" prefHeight="55.0" style="-fx-border-width: 2px 0 0 0; -fx-border-color: #D3D3D3;">
 					<children>
-						<JFXRadioButton fx:id="rbtSelecionarTodos" style="-jfx-selected-color: #009688; -jfx-unselected-color: #009688;" text="Selecionar todos" textFill="#4d4d4d">
+						<JFXRadioButton fx:id="rbtSelecionarTodos" onAction="#selecionarTodos" style="-jfx-selected-color: #009688; -jfx-unselected-color: #009688;" text="Selecionar todos" textFill="#4d4d4d">
 							<padding>
 								<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
 							</padding>
